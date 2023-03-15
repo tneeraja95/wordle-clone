@@ -1,6 +1,6 @@
 import {useMemo, useState } from "react";
 import "./App.css";
-import WordGame from "./components/WordGame";
+import WordRow from "./components/WordRow";
 import Header from "./components/Header";
 import selectWordfromWordList from "./utilities/selectWordfromWordList";
 
@@ -19,7 +19,7 @@ function App() {
 
   let wordList = []
   for(let i=0; i<NO_OF_TRIES; i++){
-    wordList.push( <WordGame
+    wordList.push( <WordRow
       classname="word"
       word={word}
       currentFocus={currentFocus}

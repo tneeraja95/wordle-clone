@@ -1,21 +1,19 @@
 import { useEffect, useRef, useState } from "react";
-import "./WordGame.css";
+import "./WordRow.css";
 import handleEnter from "../utilities/handleEnter";
 
-const NO_OF_TRIES = 6;
-
-function WordGame({
+function WordRow({
   word = "arrow",
   setCurrentFocus,
   currentFocus,
   fid,
   setShowPopup,
   setPopupText,
+  keyPressed
 }) {
   let letterArray = word.toUpperCase().split("");
-  let wLength = letterArray.length;
   let [userInputArray, setUserInputArray] = useState(
-    new Array(wLength).fill("")
+    new Array(letterArray.length).fill("")
   );
   let [matchResult, setMatchResult] = useState(new Array(5).fill("none"));
   let refArray = useRef([]);
@@ -32,14 +30,14 @@ function WordGame({
       prev[index] = char;
       return prev;
     });
-    if (index + 1 < wLength && char != "") {
+    if (index + 1 < userInputArray.length && char != "") {
       refArray.current[index + 1].focus();
     }
   }
 
   function handleKeyDown(e, index) {
     if (e.key === "Backspace") {
-      if (index === wLength - 1 && e.target.value != "") return;
+      if (index === userInputArray.length - 1 && e.target.value != "") return;
       if (index > 0) {
         refArray.current[index - 1].focus();
       }
@@ -91,4 +89,4 @@ function WordGame({
   );
 }
 
-export default WordGame;
+export default WordRow;
