@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import "./WordGame.css";
+import checkWord from "../utilities/checkWord";
+
+const NO_OF_TRIES = 6;
 
 function WordGame({
   word = "arrow",
@@ -15,7 +18,6 @@ function WordGame({
     new Array(wLength).fill("")
   );
   let [matchResult, setMatchResult] = useState(new Array(5).fill("none"));
-
   let refArray = useRef([]);
 
   useEffect(() => {
@@ -24,18 +26,37 @@ function WordGame({
     }
   }, [currentFocus]);
 
-  function checkMatch(userInputArray, wordArray) {
-    let matchResult = new Array(5).fill("none");
-    for (let i = 0; i < wLength; i++) {
-      matchResult[i] =
-        userInputArray[i] === wordArray[i]
-          ? "green"
-          : wordArray.includes(userInputArray[i])
-          ? "#B59F3B"
-          : "grey";
+  function checkMatch(userInputArray, letterArray) {
+    let letterBgArray = new Array(5).fill("none");
+    let alphabetCount = {};
+    for (let letter of letterArray) {
+      if (alphabetCount[letter]) {
+        alphabetCount[letter]++;
+      } else {
+        alphabetCount[letter] = 1;
+      }
     }
-    setMatchResult(matchResult);
-    return matchResult.reduce((prev, curr) => prev && curr === "green", true);
+    for (let i = 0; i < wLength; i++) {
+      if (userInputArray[i] === letterArray[i]) {
+        letterBgArray[i] = "green";
+        alphabetCount[userInputArray[i]]--;
+      } else {
+        letterBgArray[i] = "grey";
+      }
+    }
+    userInputArray.forEach((inputLetter, index) => {
+      if (
+        letterBgArray[index] !== "green" &&
+        alphabetCount[inputLetter] &&
+        alphabetCount[inputLetter] > 0
+      ) {
+
+        alphabetCount[inputLetter]--;
+        letterBgArray[index] = "#B59F3B";
+      }
+    });
+    setMatchResult(letterBgArray);
+    return letterBgArray.reduce((prev, curr) => prev && curr === "green", true);
   }
 
   function handleChange(e, index) {
@@ -49,8 +70,7 @@ function WordGame({
     }
   }
 
-  function handleSubmit(index = 4) {
-    console.log(userInputArray[index]);
+  function handleSubmit(index) {
     if (index + 1 != wLength || userInputArray[index] === "") {
       setPopupText("not enough letters");
       setShowPopup(true);
@@ -60,26 +80,32 @@ function WordGame({
       return;
     }
 
+    if(!checkWord(userInputArray.join(""))){
+      setPopupText("Not in wordlist");
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 1000);
+      return;
+    }
+
     let result = checkMatch(userInputArray, wordArray);
     if (result === true) {
-      // alert("correct");
       setPopupText("Amazing");
       setShowPopup(true);
-    }
-    // else {
-    //   alert("incorrect");
-    // }
-    if (fid === 5) {
-      refArray.current[4].blur();
+      refArray.current[index].blur();
+    } else if(fid === NO_OF_TRIES-1){
+
+      setPopupText(wordArray.join(""));
+      setShowPopup(true);
     } else {
       setCurrentFocus((prev) => prev + 1);
     }
   }
 
   function handleKeyDown(e, index) {
-    console.log(index, e.key);
     if (e.key === "Backspace") {
-      if (index === 4 && e.target.value != "") return;
+      if (index === wLength - 1 && e.target.value != "") return;
       if (index > 0) {
         refArray.current[index - 1].focus();
       }
