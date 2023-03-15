@@ -1,0 +1,48 @@
+import checkWordinWordList from "../utilities/checkWordinWordList";
+import checkMatch from "./checkMatch";
+
+const NO_OF_TRIES = 6;
+
+function handleEnter(
+  userInputArray,
+  letterArray,
+  index,
+  setPopupText,
+  setShowPopup,
+  setCurrentFocus,
+  setMatchResult,
+  refArray,
+  fid
+) {
+  if (index + 1 != userInputArray.length || userInputArray[index] === "") {
+    setPopupText("not enough letters");
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 1000);
+    return;
+  }
+
+  if (!checkWordinWordList(userInputArray.join(""))) {
+    setPopupText("Not in wordlist");
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 1000);
+    return;
+  }
+
+  let result = checkMatch(userInputArray, letterArray, setMatchResult);
+  if (result === true) {
+    setPopupText("Amazing");
+    setShowPopup(true);
+    refArray.current[index].blur();
+  } else if (fid === NO_OF_TRIES - 1) {
+    setPopupText(letterArray.join(""));
+    setShowPopup(true);
+  } else {
+    setCurrentFocus((prev) => prev + 1);
+  }
+}
+
+export default handleEnter;

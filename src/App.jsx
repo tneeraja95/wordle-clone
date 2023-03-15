@@ -1,8 +1,8 @@
-import {useMemo, useEffect, useState } from "react";
+import {useMemo, useState } from "react";
 import "./App.css";
 import WordGame from "./components/WordGame";
 import Header from "./components/Header";
-import selectWord from "./utilities/selectWord";
+import selectWordfromWordList from "./utilities/selectWordfromWordList";
 
 const NO_OF_TRIES = 6;
 
@@ -12,7 +12,7 @@ function App() {
   let [popupText, setPopupText] = useState("Not enough Letters");
 
   let word = useMemo(()=> {
-    return selectWord();
+    return selectWordfromWordList();
   }, []);
 
     console.log(word);
