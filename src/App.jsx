@@ -3,6 +3,7 @@ import "./App.css";
 import WordRow from "./components/WordRow";
 import Header from "./components/Header";
 import selectWordfromWordList from "./utilities/selectWordfromWordList";
+import HowToPlay from "./components/HowToPlay";
 
 const NO_OF_TRIES = 6;
 
@@ -32,6 +33,7 @@ function App() {
   }
   return (
     <div onMouseDown={(e) => e.preventDefault()} className="app">
+      <HowToPlay/>
       <Header />
       <div className="wordGame">
       <div className={showPopup?"popup": "popup invisible"}>{popupText}</div>
