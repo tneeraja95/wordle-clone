@@ -22,7 +22,7 @@ export function HowToPlay() {
         <h3>Examples</h3>
         <div className="exampleBorder">
           <div className="example">
-            <div className="letter" style={{ backgroundColor: "green" }}>
+            <div className="letter" style={{ backgroundColor: "green",borderColor: "green" }}>
               W
             </div>
             <div className="letter">E</div>
@@ -37,7 +37,7 @@ export function HowToPlay() {
             <div className="letter" >
               P
             </div>
-            <div className="letter" style={{ backgroundColor: "rgb(181, 159, 59)" }}>I</div>
+            <div className="letter" style={{ backgroundColor: "rgb(181, 159, 59)", borderColor: "rgb(181, 159, 59)"}}>I</div>
             <div className="letter">L</div>
             <div className="letter">L</div>
             <div className="letter">S</div>
@@ -52,7 +52,7 @@ export function HowToPlay() {
             </div>
             <div className="letter">A</div>
             <div className="letter">G</div>
-            <div className="letter" style={{ backgroundColor: "grey" }}>U</div>
+            <div className="letter" style={{ backgroundColor: "grey", borderColor: "grey" }}>U</div>
             <div className="letter">E</div>
           </div>
           <b>U</b> is not in the word in any spot.

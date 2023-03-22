@@ -5,7 +5,7 @@
   /*  border-radius: 8px;;*/
     padding: 20px 32px;
     max-width: 520px;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .howToPlay h3 {
@@ -21,16 +21,18 @@
     display: flex;
     flex-direction: row;
     margin: 8px 0 5px;
+    font-size: 20px;
 }
 
 .howToPlay .example .letter {
-    border: 2px solid rgb(86, 87, 88);
-    font-size: 25.6px;
-    margin: 2px;
-    width: 32px;
-    height: 32px;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 3px;
+    width: 35px;
+    height: 35px;
     align-content: center;
-    text-align: center;   
+    text-align: center; 
+    border: 2px solid rgb(86, 87, 88)  
 }
 
 .howToPlay .close {

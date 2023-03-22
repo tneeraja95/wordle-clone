@@ -1,44 +1,19 @@
-import {useMemo, useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import WordRow from "./components/WordRow";
 import Header from "./components/Header";
-import selectWordfromWordList from "./utilities/selectWordfromWordList";
 import HowToPlay from "./components/HowToPlay";
-
-const NO_OF_TRIES = 6;
+import Keyboard from "./components/Keyboard";
+import WordGame from "./components/WordGame";
+import initialiseKeyboardArray from "./utilities/initialiseKeyboardArray";
 
 function App() {
-  let [currentFocus, setCurrentFocus] = useState(0);  
-  let [showPopup, setShowPopup] = useState(false);
-  let [popupText, setPopupText] = useState("Not enough Letters");
 
-  let word = useMemo(()=> {
-    return selectWordfromWordList();
-  }, []);
 
-    console.log(word);
-
-  let wordList = []
-  for(let i=0; i<NO_OF_TRIES; i++){
-    wordList.push( <WordRow
-      classname="word"
-      word={word}
-      currentFocus={currentFocus}
-      setCurrentFocus={setCurrentFocus}
-      fid={i}
-      setShowPopup={setShowPopup}
-      setPopupText={setPopupText}
-      key={i}
-    />)
-  }
   return (
     <div onMouseDown={(e) => e.preventDefault()} className="app">
-      <HowToPlay/>
+      <HowToPlay />
       <Header />
-      <div className="wordGame">
-      <div className={showPopup?"popup": "popup invisible"}>{popupText}</div>
-       <div>{wordList}</div>
-      </div>
+      <WordGame/>
     </div>
   );
 }

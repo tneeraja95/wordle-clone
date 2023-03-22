@@ -1,4 +1,12 @@
-function checkMatch(userInputArray, letterArray, setMatchResult) {
+import updateKeyboardArray from "./updateKeyboardArray";
+
+function checkMatch(
+  userInputArray,
+  letterArray,
+  setKeyboardArray,
+  setUserInputArrayMatrix,
+  rowId
+) {
   let letterBgArray = new Array(5).fill("none");
   let alphabetCount = {};
   for (let letter of letterArray) {
@@ -9,24 +17,33 @@ function checkMatch(userInputArray, letterArray, setMatchResult) {
     }
   }
   for (let i = 0; i < userInputArray.length; i++) {
-    if (userInputArray[i] === letterArray[i]) {
+    if (userInputArray[i].letter === letterArray[i]) {
       letterBgArray[i] = "green";
       alphabetCount[userInputArray[i]]--;
     } else {
-      letterBgArray[i] = "grey";
+      letterBgArray[i] = "rgb(58, 58, 60)";
     }
   }
   userInputArray.forEach((inputLetter, index) => {
     if (
       letterBgArray[index] !== "green" &&
-      alphabetCount[inputLetter] &&
-      alphabetCount[inputLetter] > 0
+      alphabetCount[inputLetter.letter] &&
+      alphabetCount[inputLetter.letter] > 0
     ) {
-      alphabetCount[inputLetter]--;
+      alphabetCount[inputLetter.letter]--;
       letterBgArray[index] = "#B59F3B";
     }
   });
-  setMatchResult(letterBgArray);
+  
+  setUserInputArrayMatrix((prev) => {
+    letterBgArray.forEach((element, index) => {
+      prev[rowId][index].color = element;
+    });
+    return prev;
+  });
+  
+  updateKeyboardArray(setKeyboardArray, userInputArray);
+
   return letterBgArray.reduce((prev, curr) => prev && curr === "green", true);
 }
 

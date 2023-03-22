@@ -6,28 +6,28 @@ function WordRow({
   word = "arrow",
   setCurrentFocus,
   currentFocus,
-  fid,
+  rowId,
   setShowPopup,
   setPopupText,
-  keyPressed
+  userInputArrayMatrix,
+  setUserInputArrayMatrix,
+  setKeyboardArray
 }) {
   let letterArray = word.toUpperCase().split("");
-  let [userInputArray, setUserInputArray] = useState(
-    new Array(letterArray.length).fill("")
-  );
-  let [matchResult, setMatchResult] = useState(new Array(5).fill("none"));
+  
   let refArray = useRef([]);
-
+  let userInputArray = userInputArrayMatrix[rowId];
+  
   useEffect(() => {
-    if (currentFocus === fid) {
+    if (currentFocus === rowId) {
       refArray.current[0].focus();
     }
   }, [currentFocus]);
 
   function handleChange(e, index) {
     let char = e.target.value.toUpperCase();
-    setUserInputArray((prev) => {
-      prev[index] = char;
+    setUserInputArrayMatrix((prev) => {
+      prev[rowId][index].letter = char;
       return prev;
     });
     if (index + 1 < userInputArray.length && char != "") {
@@ -50,9 +50,10 @@ function WordRow({
         setPopupText,
         setShowPopup,
         setCurrentFocus,
-        setMatchResult,
         refArray,
-        fid
+        rowId,
+        setKeyboardArray,
+        setUserInputArrayMatrix
       );
     }
   }
@@ -81,7 +82,7 @@ function WordRow({
               handleKeyDown(e, index);
             }}
             onMouseDown={(e) => e.preventDefault()}
-            style={{ background: matchResult[index] }}
+            style={{ background: userInputArray[index].color }}
           />
         );
       })}

@@ -1,0 +1,13 @@
+.keyboard .letter {
+    width: 43px;
+    height: 58px;
+    background-color: gray;
+    margin: 3px;
+    font-size: x-large;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
