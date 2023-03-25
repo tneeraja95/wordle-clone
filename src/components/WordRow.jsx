@@ -1,93 +1,68 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import "./WordRow.css";
-import handleEnter from "../utilities/handleEnter";
 
 function WordRow({
-  word = "arrow",
-  setCurrentFocus,
   currentFocus,
   rowId,
-  setShowPopup,
-  setPopupText,
   userInputArrayMatrix,
-  setUserInputArrayMatrix,
-  setKeyboardArray
+  handleKeyPress,
+  refArrayMatrix,
+   setIndex
 }) {
-  let letterArray = word.toUpperCase().split("");
-  
-  let refArray = useRef([]);
   let userInputArray = userInputArrayMatrix[rowId];
-  
   useEffect(() => {
     if (currentFocus === rowId) {
-      refArray.current[0].focus();
+      refArrayMatrix.current[rowId][0].focus();
     }
   }, [currentFocus]);
 
-  function handleChange(e, index) {
-    let char = e.target.value.toUpperCase();
-    setUserInputArrayMatrix((prev) => {
-      prev[rowId][index].letter = char;
-      return prev;
-    });
-    if (index + 1 < userInputArray.length && char != "") {
-      refArray.current[index + 1].focus();
-    }
-  }
+  let wordRowInput = userInputArray.map((letter, index) => {
+    return (
+      <div
+        key={index}
+        type="text"
+        maxLength={1}
+        size={1}
+        ref={(input) => {
+          refArrayMatrix.current[rowId][index] = input;
+        }}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        onChange={(e) => {
+       //   setIndex(index)
+          handleKeyPress(e.target.value.toUpperCase(), index);
+        }}
+        onKeyDown={(e) => {
+          setIndex(index)
+          if(e.key === 'Enter' || e.key === 'Backspace')
+          handleKeyPress(e.key, index);
+        }}
+        onMouseDown={(e) => e.preventDefault()}
+        style={{ background: userInputArray[index].color }}
+      />
+    );
+  });
 
-  function handleKeyDown(e, index) {
-    if (e.key === "Backspace") {
-      if (index === userInputArray.length - 1 && e.target.value != "") return;
-      if (index > 0) {
-        refArray.current[index - 1].focus();
-      }
-    }
-    if (e.key === "Enter") {
-      handleEnter(
-        userInputArray,
-        letterArray,
-        index,
-        setPopupText,
-        setShowPopup,
-        setCurrentFocus,
-        refArray,
-        rowId,
-        setKeyboardArray,
-        setUserInputArrayMatrix
-      );
-    }
-  }
-
-  return (
-    <div className="word">
-      {userInputArray.map((letter, index) => {
-        return (
-          <input
-            key={index}
-            type="text"
-            maxLength={1}
-            size={1}
-            onChange={(e) => handleChange(e, index)}
-            ref={(input) => {
-              refArray.current[index] = input;
-            }}
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit(index);
-            }}
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            onKeyDown={(e) => {
-              handleKeyDown(e, index);
-            }}
-            onMouseDown={(e) => e.preventDefault()}
-            style={{ background: userInputArray[index].color }}
-          />
-        );
-      })}
-    </div>
+  wordRowInput.push(
+    <div
+      className="noShow"
+      type="text"
+      maxLength={0}
+      size={0}
+      key={6}
+      ref={(input) => {
+        refArrayMatrix.current[rowId][5] = input;
+      }}
+      onKeyDown={(e) => {
+        e.stopPropagation();
+          setIndex(5);
+        handleKeyPress(e.key, 5);
+      }}
+    />
   );
+
+  return <div className="word">{wordRowInput}</div>;
 }
 
 export default WordRow;

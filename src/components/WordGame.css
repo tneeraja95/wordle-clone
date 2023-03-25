@@ -8,9 +8,10 @@
 
 .wordGame .word {
     margin: 3px;
+    display: flex;
 }
 
-.wordGame .word input {
+.wordGame .word div {
     margin: 3px;
     color: white;
     padding: 10px;
@@ -21,11 +22,17 @@
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
+    width: 30px;
+    height: 40px;
 }
 
-.wordGame .word input:focus {
-   outline: none;
-   caret-color: transparent;
+.wordGame .word .noShow {
+    width : 0px;
+    height: 0px;
+    position: fixed;
+    left: -120px;
+    top: -120px;
+    z-index: -100;
 }
 
 .wordGame .popup {
@@ -38,6 +45,7 @@
     font-weight: 600;
     font-family: sans-serif;
     z-index: 100;
+    top: 300px;
 }
 
 .wordGame .invisible {

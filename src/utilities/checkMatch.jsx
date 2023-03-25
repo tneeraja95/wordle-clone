@@ -16,14 +16,16 @@ function checkMatch(
       alphabetCount[letter] = 1;
     }
   }
+
   for (let i = 0; i < userInputArray.length; i++) {
     if (userInputArray[i].letter === letterArray[i]) {
       letterBgArray[i] = "green";
-      alphabetCount[userInputArray[i]]--;
+      alphabetCount[userInputArray[i].letter]--;
     } else {
       letterBgArray[i] = "rgb(58, 58, 60)";
     }
   }
+  
   userInputArray.forEach((inputLetter, index) => {
     if (
       letterBgArray[index] !== "green" &&
@@ -34,13 +36,14 @@ function checkMatch(
       letterBgArray[index] = "#B59F3B";
     }
   });
-  
+
   setUserInputArrayMatrix((prev) => {
+    let newArray = [...prev];
     letterBgArray.forEach((element, index) => {
-      prev[rowId][index].color = element;
-    });
-    return prev;
+    newArray[rowId][index].color = element;
   });
+  return newArray;
+});
   
   updateKeyboardArray(setKeyboardArray, userInputArray);
 

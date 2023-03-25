@@ -2,6 +2,7 @@ import checkWordinWordList from "../utilities/checkWordinWordList";
 import checkMatch from "./checkMatch";
 
 const NO_OF_TRIES = 6;
+const WORD_LENGTH = 5;
 
 function handleEnter(
   userInputArray,
@@ -10,12 +11,11 @@ function handleEnter(
   setPopupText,
   setShowPopup,
   setCurrentFocus,
-  refArray,
   rowId,
   setKeyboardArray,
   setUserInputArrayMatrix
 ) {
-  if (index + 1 != userInputArray.length || userInputArray[index] === "") {
+  if (index < WORD_LENGTH ){
     setPopupText("not enough letters");
     setShowPopup(true);
     setTimeout(() => {
@@ -24,7 +24,11 @@ function handleEnter(
     return;
   }
 
-  if (!checkWordinWordList(userInputArray.reduce((prev, curr)=> prev+curr.letter, ""))) {
+  else if (
+    !checkWordinWordList(
+      userInputArray.reduce((prev, curr) => prev + curr.letter, "")
+    )
+  ) {
     setPopupText("Not in wordlist");
     setShowPopup(true);
     setTimeout(() => {
@@ -33,16 +37,21 @@ function handleEnter(
     return;
   }
 
-  let result = checkMatch(userInputArray, letterArray, setKeyboardArray, setUserInputArrayMatrix, rowId);
+  let result = checkMatch(
+    userInputArray,
+    letterArray,
+    setKeyboardArray,
+    setUserInputArrayMatrix,
+    rowId
+  );
   if (result === true) {
     setPopupText("Amazing");
     setShowPopup(true);
-    refArray.current[index].blur();
   } else if (rowId === NO_OF_TRIES - 1) {
     setPopupText(letterArray.join(""));
     setShowPopup(true);
   } else {
-    setCurrentFocus((prev) => prev + 1);
+    setCurrentFocus(() => [rowId+1, 0]);
   }
 }
 

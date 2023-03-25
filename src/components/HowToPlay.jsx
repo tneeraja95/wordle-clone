@@ -42,7 +42,7 @@ export function HowToPlay() {
             <div className="letter">L</div>
             <div className="letter">S</div>
           </div>
-          <b>P</b> is in the word but in the wrong spot.
+          <b>I</b> is in the word but in the wrong spot.
         </div>
 
         <div className="exampleBorder">
