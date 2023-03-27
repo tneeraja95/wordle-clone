@@ -8,10 +8,11 @@ import handleEnter from "../utilities/handleEnter";
 const NO_OF_TRIES = 6;
 const WORD_LENGTH = 5;
 
-function WordGame() {
-  let [currentFocus, setCurrentFocus] = useState([0, 0]);
+function WordGame({ setGameOver, resetGame }) {
   let [showPopup, setShowPopup] = useState(false);
-  let [popupText, setPopupText] = useState("Not enough Letters");
+  let [popupText, setPopupText] = useState("");
+
+  let [currentFocus, setCurrentFocus] = useState([0, 0]);
   let [userInputArrayMatrix, setUserInputArrayMatrix] = useState(
     Array.from({ length: NO_OF_TRIES }, () =>
       Array.from({ length: WORD_LENGTH }, () => ({ letter: "", color: "none" }))
@@ -20,7 +21,21 @@ function WordGame() {
   let [keyboardArray, setKeyboardArray] = useState(initialiseKeyboardArray());
   let word = useMemo(() => {
     return selectWordfromWordList();
-  }, []);
+  }, [resetGame]);
+
+  useEffect(() => {
+    setCurrentFocus(() => [0, 0]);
+    setUserInputArrayMatrix(() =>
+      Array.from({ length: NO_OF_TRIES }, () =>
+        Array.from({ length: WORD_LENGTH }, () => ({
+          letter: "",
+          color: "none",
+        }))
+      )
+    );
+    setKeyboardArray(initialiseKeyboardArray());
+    word = selectWordfromWordList();
+  }, [resetGame]);
 
   console.log(word);
   useEffect(() => {
@@ -80,7 +95,8 @@ function WordGame() {
         setCurrentFocus,
         rowId,
         setKeyboardArray,
-        setUserInputArrayMatrix
+        setUserInputArrayMatrix,
+        setGameOver
       );
     } else if (
       key.length === 1 &&

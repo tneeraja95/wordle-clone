@@ -1,6 +1,6 @@
 import "./HowToPlay.css";
 import { useState } from "react";
-import { Dialog, DialogTitle } from "@mui/material";
+import { Dialog } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 export function HowToPlay() {

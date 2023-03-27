@@ -13,27 +13,25 @@ function handleEnter(
   setCurrentFocus,
   rowId,
   setKeyboardArray,
-  setUserInputArrayMatrix
+  setUserInputArrayMatrix,
+  setGameOver
 ) {
-  if (index < WORD_LENGTH ){
-    setPopupText("not enough letters");
+  function updatePopupText(text) {
+    setPopupText(text);
     setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 1000);
-    return;
+    setTimeout(() => setShowPopup(false), 1000);
   }
 
-  else if (
+  if (index < WORD_LENGTH) {
+    updatePopupText("not enough letters");
+
+    return;
+  } else if (
     !checkWordinWordList(
       userInputArray.reduce((prev, curr) => prev + curr.letter, "")
     )
   ) {
-    setPopupText("Not in wordlist");
-    setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 1000);
+    updatePopupText("Not in wordlist");
     return;
   }
 
@@ -45,13 +43,14 @@ function handleEnter(
     rowId
   );
   if (result === true) {
-    setPopupText("Amazing");
-    setShowPopup(true);
+    updatePopupText("Amazing");
+    setTimeout(() => setGameOver(true), 1000);
   } else if (rowId === NO_OF_TRIES - 1) {
-    setPopupText(letterArray.join(""));
+    updatePopupText(letterArray.join(""));
     setShowPopup(true);
+    setTimeout(() => setGameOver(true), 1000);
   } else {
-    setCurrentFocus(() => [rowId+1, 0]);
+    setCurrentFocus(() => [rowId + 1, 0]);
   }
 }
 

@@ -1,0 +1,25 @@
+.playAgain {
+    background-color: rgb(18, 18, 19);
+    color: white;
+    border: 1px solid rgb(26, 26, 27);
+    padding: 20px 32px;
+    max-width: 520px;
+    font-size: 20px;
+}
+
+.playAgain button {
+    background-color: aliceblue;
+    border-radius: 85px;
+    cursor: pointer;
+}
+
+.playAgain .close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    color: white;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    margin: 20px;
+}
