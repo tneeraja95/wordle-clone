@@ -19,7 +19,7 @@ function Keyboard({ keyboardArray, onLetterClick }) {
         <Letter letter={"P"} bgColor={keyboardArray["P"]} onLetterClick={onLetterClick} />
       </div>
       <div className="qwerty">
-        <div class="spacer"></div>
+        <div className="spacer"></div>
         <Letter letter={"A"} bgColor={keyboardArray["A"]} onLetterClick={onLetterClick} />
         <Letter letter={"S"} bgColor={keyboardArray["S"]} onLetterClick={onLetterClick} />
         <Letter letter={"D"} bgColor={keyboardArray["D"]} onLetterClick={onLetterClick} />
