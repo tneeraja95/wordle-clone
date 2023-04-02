@@ -25,6 +25,7 @@ function WordGame({ setGameOver, resetGame }) {
 
   useEffect(() => {
     setCurrentFocus(() => [0, 0]);
+    setShowPopup(false);
     setUserInputArrayMatrix(() =>
       Array.from({ length: NO_OF_TRIES }, () =>
         Array.from({ length: WORD_LENGTH }, () => ({
@@ -114,7 +115,7 @@ function WordGame({ setGameOver, resetGame }) {
   return (
     <div className="wordGame">
       <div className={showPopup ? "popup" : "popup invisible"}>{popupText}</div>
-      <div>{gameArray}</div>
+      <div className="gameArray">{gameArray}</div>
       <Keyboard keyboardArray={keyboardArray} onLetterClick={handleKeyPress} />
     </div>
   );

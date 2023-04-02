@@ -14,7 +14,7 @@ function App() {
     <div onMouseDown={(e) => e.preventDefault()} className="app">
       <HowToPlay />
       <PlayAgain gameOver={gameOver} setGameOver={setGameOver} setResetGame={setResetGame}/>
-      <Header />
+      <Header setGameOver={setGameOver}/>
       <WordGame setGameOver={setGameOver} resetGame={resetGame} setResetGame={setResetGame}/>
     </div>
   );

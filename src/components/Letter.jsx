@@ -1,13 +1,17 @@
 import React from 'react'
 import './Letter.css'
 
-function Letter({letter, bgColor, onLetterClick, width="43"}) {
+function Letter({letter, bgColor, onLetterClick}) {
    // console.log(typeof letter);
    let key = letter;
+   let className = 'letter';
    if(typeof letter === 'object') //backspace is a symbol object
         key = 'Backspace';
+
+      if(letter === 'Enter' || typeof letter === 'object')
+        className = 'letter special'
   return (
-    <div className='letter' style={{backgroundColor: bgColor, width: width+"px" }} onClick={()=> {onLetterClick(key)}} >
+    <div className={className} style={{backgroundColor: bgColor }} onClick={()=> {onLetterClick(key)}} >
       {letter}
     </div>
   )

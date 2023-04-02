@@ -1,5 +1,4 @@
 .keyboard .letter {
-    width: 43px;
     height: 58px;
     background-color: gray;
     margin: 3px;
@@ -10,4 +9,9 @@
     justify-content: center;
     border-radius: 4px;
     cursor: pointer;
+    flex: 1;
+}
+
+.keyboard .special {
+    flex: 1.5;
 }

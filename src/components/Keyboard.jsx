@@ -19,6 +19,7 @@ function Keyboard({ keyboardArray, onLetterClick }) {
         <Letter letter={"P"} bgColor={keyboardArray["P"]} onLetterClick={onLetterClick} />
       </div>
       <div className="qwerty">
+        <div class="spacer"></div>
         <Letter letter={"A"} bgColor={keyboardArray["A"]} onLetterClick={onLetterClick} />
         <Letter letter={"S"} bgColor={keyboardArray["S"]} onLetterClick={onLetterClick} />
         <Letter letter={"D"} bgColor={keyboardArray["D"]} onLetterClick={onLetterClick} />
@@ -28,9 +29,10 @@ function Keyboard({ keyboardArray, onLetterClick }) {
         <Letter letter={"J"} bgColor={keyboardArray["J"]} onLetterClick={onLetterClick} />
         <Letter letter={"K"} bgColor={keyboardArray["K"]} onLetterClick={onLetterClick} />
         <Letter letter={"L"} bgColor={keyboardArray["L"]} onLetterClick={onLetterClick} />
+        <div class="spacer"></div>
       </div>
       <div className="qwerty">
-        <Letter letter={"Enter"} bgColor="grey" width="70" onLetterClick={onLetterClick} />
+        <Letter letter={"Enter"} bgColor="grey" onLetterClick={onLetterClick} />
         <Letter letter={"Z"} bgColor={keyboardArray["Z"]} onLetterClick={onLetterClick} />
         <Letter letter={"X"} bgColor={keyboardArray["X"]} onLetterClick={onLetterClick} />
         <Letter letter={"C"} bgColor={keyboardArray["C"]} onLetterClick={onLetterClick} />
@@ -38,7 +40,7 @@ function Keyboard({ keyboardArray, onLetterClick }) {
         <Letter letter={"B"} bgColor={keyboardArray["B"]} onLetterClick={onLetterClick} />
         <Letter letter={"N"} bgColor={keyboardArray["N"]} onLetterClick={onLetterClick} />
         <Letter letter={"M"} bgColor={keyboardArray["M"]} onLetterClick={onLetterClick} />
-        <Letter letter={<BackspaceIcon/>} bgColor="grey" width="70" onLetterClick={onLetterClick} />
+        <Letter letter={<BackspaceIcon/>} bgColor="grey" onLetterClick={onLetterClick} />
       </div>
     </div>
   );

@@ -5,6 +5,8 @@
     padding: 20px 32px;
     max-width: 520px;
     font-size: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .playAgain button {
@@ -23,3 +25,22 @@
     cursor: pointer;
     margin: 20px;
 }
+
+.playAgain ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .playAgain li {
+    padding: 10px;
+    margin: 10px;
+    border-bottom: 2px dotted white;    
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+  }
+
+  .playAgain h2 {
+    text-align: center;
+  }
