@@ -6,5 +6,10 @@ Demo Link - https://wordle-clone-9oqv.onrender.com/
 
 Screenshots - 
 
-How to Play -
-![HowToPlay] (./src/icons/Screenshot-Start-Game.png?raw=true "Optional Title")
+![How To Play](./src/icons/Screenshot-How-To-Play.png?raw=true "Optional Title")
+
+![Start of Game](./src/icons/Screenshot-Start-Game.png?raw=true "Optional Title")
+
+![After 2 Tries](./src/icons/Screenshot-Mid-Game.png?raw=true "Optional Title")
+
+![End Screen](./src/icons/Screenshot-End-Game.png?raw=true "Optional Title")
