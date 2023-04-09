@@ -7,4 +7,4 @@ Demo Link - https://wordle-clone-9oqv.onrender.com/
 Screenshots - 
 
 How to Play -
-![HowToPlay] (./dist/assests/Screenshot-Start-Game.png?raw=true "Optional Title")
+![HowToPlay] (./src/icons/Screenshot-Start-Game.png?raw=true "Optional Title")
