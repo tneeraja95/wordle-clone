@@ -1,5 +1,5 @@
 .keyboard {
-  /* margin: 20px; */
+  margin: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,7 @@
 .keyboard .qwerty {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: fit-content;
 }
 
 .keyboard .spacer {

@@ -7,7 +7,7 @@ function PlayAgain({ gameOver, setGameOver, setResetGame }) {
   return (
     <Dialog open={gameOver} onClose={() => setGameOver(false)}>
       <div className="playAgain">
-        <Statistics/>
+        <Statistics />
         <CloseIcon onClick={() => setGameOver(false)} className="close" />
         <button
           onClick={() => {
@@ -15,7 +15,7 @@ function PlayAgain({ gameOver, setGameOver, setResetGame }) {
             setResetGame((prev) => prev + 1);
           }}
         >
-          <h2>Play Again</h2>
+          Play Again
         </button>
       </div>
     </Dialog>

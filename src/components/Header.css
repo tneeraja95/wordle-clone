@@ -1,22 +1,24 @@
 .header {
-    align-items: center;
-    justify-content: space-between;
-    display: flex;
-    border: 1px solid #3A3A3C;
-    padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  border-bottom: 1px solid #3a3a3c;
+  padding: 28px 0 0 0;
 }
 
-.header h1 {
-    font-weight: 700;
-    font-size: 32px;
-    margin: 3px;
+.header .heading {
+  font-weight: 700;
+  font-size: 40px;
+  margin: 3px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .header .stats {
-    width: 2rem;
-    height: 2rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .header div {
-    width: 2rem;
+  width: 2rem;
 }

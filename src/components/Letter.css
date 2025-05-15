@@ -1,17 +1,17 @@
 .keyboard .letter {
-    height: 58px;
-    background-color: gray;
-    margin: 3px;
-    font-size: x-large;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    cursor: pointer;
-    flex: 1;
+  height: 48px;
+  background-color: gray;
+  margin: 3px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 36px;
 }
 
 .keyboard .special {
-    flex: 1.5;
+  width: 72px;
 }

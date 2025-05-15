@@ -1,14 +1,14 @@
-import './Header.css';
-import BarChartIcon from '@mui/icons-material/BarChart';
+import "./Header.css";
+import BarChartIcon from "@mui/icons-material/BarChart";
 
-function Header({setGameOver}) {
+function Header({ setGameOver }) {
   return (
-    <div className='header'>
+    <div className="header">
       <div></div>
-      <h1>Wordle</h1>
-      <BarChartIcon className='stats' onClick={()=>setGameOver(true)}/>
+      <div className="heading">Wordle</div>
+      <BarChartIcon className="stats" onClick={() => setGameOver(true)} />
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

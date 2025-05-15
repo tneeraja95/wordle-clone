@@ -114,9 +114,17 @@ function WordGame({ setGameOver, resetGame }) {
 
   return (
     <div className="wordGame">
-      <div className={showPopup ? "popup" : "popup invisible"}>{popupText}</div>
-      <div className="gameArray">{gameArray}</div>
-      <Keyboard keyboardArray={keyboardArray} onLetterClick={handleKeyPress} />
+      <div className="mainGame">
+        <div className={showPopup ? "popup" : "popup invisible"}>
+          {popupText}
+        </div>
+
+        <div className="gameArray">{gameArray}</div>
+        <Keyboard
+          keyboardArray={keyboardArray}
+          onLetterClick={handleKeyPress}
+        />
+      </div>
     </div>
   );
 }

@@ -1,46 +1,47 @@
 .playAgain {
-    background-color: rgb(18, 18, 19);
-    color: white;
-    border: 1px solid rgb(26, 26, 27);
-    padding: 20px 32px;
-    max-width: 520px;
-    font-size: 20px;
-    display: flex;
-    flex-direction: column;
+  background-color: rgb(18, 18, 19);
+  color: white;
+  border: 1px solid rgb(26, 26, 27);
+  padding: 20px 32px;
+  max-width: 520px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: fantasy;
 }
 
 .playAgain button {
-    background-color: aliceblue;
-    border-radius: 85px;
-    cursor: pointer;
+  background-color: aliceblue;
+  border-radius: 85px;
+  cursor: pointer;
+  font-family: fantasy;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 8px;
 }
 
 .playAgain .close {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    color: white;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    margin: 20px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  color: white;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  margin: 12px;
 }
 
 .playAgain ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
-  .playAgain li {
-    padding: 10px;
-    margin: 10px;
-    border-bottom: 2px dotted white;    
-    display: flex;
-    justify-content: space-between;
-    width: 200px;
-  }
-
-  .playAgain h2 {
-    text-align: center;
-  }
+.playAgain li {
+  padding: 10px;
+  margin: 10px;
+  border-bottom: 2px dotted white;
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}

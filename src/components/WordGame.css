@@ -1,44 +1,45 @@
 .wordGame {
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.wordGame .mainGame {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   margin: 5px;
-  height: 100%;
   font-family: "Times New Roman", Times, serif;
 }
 
-.wordGame .gameArray {
-  width: 100%;
-  justify-content: center;
-  max-width: 300px;
-}
-
-.wordGame .word {
-  margin: 3px;
+.wordGame .mainGame .word {
   display: flex;
-  width: 100%;
-  height: 100%;
-  max-height: 64px;
+  width: fit-content;
+  height: fit-content;
 }
 
-.wordGame .word div {
-  margin: 3px;
+.wordGame .mainGame .word div {
+  margin: 2px;
   color: white;
-  padding: 7px;
   text-transform: uppercase;
-  font-size: 2rem;
-  line-height: 1;
+  font-size: 24px;
   font-weight: bold;
   border: 2px solid #3a3a3c;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  flex: 1;
-  aspect-ratio: 1 / 1;
+  height: 56px;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  background-color: #3a3a3c;
 }
 
-.wordGame .popup {
+.wordGame .mainGame .popup {
   position: absolute;
   background-color: white;
   color: black;
@@ -51,6 +52,6 @@
   top: 300px;
 }
 
-.wordGame .invisible {
+.wordGame .mainGame .invisible {
   visibility: hidden;
 }

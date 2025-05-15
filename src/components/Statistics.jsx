@@ -1,25 +1,13 @@
 function Statistics() {
-  let noOfGames = parseInt(localStorage.getItem("noOfGames"));
-  let AvgGuesses = parseInt(localStorage.getItem("AvgGuesses"));
-  let gamesWon = parseInt(localStorage.getItem("gamesWon"));
-  let gamesLost = parseInt(localStorage.getItem("gamesLost"));
+  let noOfGames = parseInt(localStorage.getItem("noOfGames") || 0);
+  let AvgGuesses = parseInt(localStorage.getItem("AvgGuesses") || 0);
+  let gamesWon = parseInt(localStorage.getItem("gamesWon") || 0);
+  let gamesLost = parseInt(localStorage.getItem("gamesLost") || 0);
 
-  let showStats = false;
-  if (
-    isNaN(noOfGames) ||
-    isNaN(AvgGuesses) ||
-    isNaN(gamesLost) ||
-    isNaN(gamesWon)
-  ) {
-    showStats = false;
-  } else {
-    showStats = true;
-  }
   return (
     <div>
-      {showStats && (
+      {
         <div className="stats">
-          <h2>Statistics</h2>
           <ul>
             <li>
               <div>Total Games</div>
@@ -39,7 +27,7 @@ function Statistics() {
             </li>
           </ul>
         </div>
-      )}
+      }
     </div>
   );
 }
