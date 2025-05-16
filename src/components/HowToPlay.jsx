@@ -11,21 +11,29 @@ export function getTileStyle(color = colors.gray) {
   };
 }
 
-const ExampleRow = ({ word, highlightIndex, color, explanation, flipped }) => (
+const ExampleRow = ({
+  word,
+  highlightIndex,
+  color,
+  explanation,
+  letterFlipped,
+}) => (
   <div className="exampleBorder">
     <div className="example">
       {word.split("").map((char, index) => (
         <div
           key={index}
           className={`letter ${
-            flipped && index === highlightIndex ? "flip" : ""
+            letterFlipped && index === highlightIndex ? "flip" : ""
           }`}
-          style={index === highlightIndex && flipped ? getTileStyle(color) : {}}
+          style={
+            index === highlightIndex && letterFlipped ? getTileStyle(color) : {}
+          }
         >
           <div
             className="letter-content"
             style={
-              index === highlightIndex && flipped
+              index === highlightIndex && letterFlipped
                 ? {
                     transform: "rotateX(180deg)",
                   }
@@ -43,10 +51,10 @@ const ExampleRow = ({ word, highlightIndex, color, explanation, flipped }) => (
 
 export function HowToPlay() {
   const [open, setOpen] = useState(true);
-  const [flipped, setFlipped] = useState(false);
+  const [letterFlipped, setLetterFlipped] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setFlipped(true), 500);
+    const timer = setTimeout(() => setLetterFlipped(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -69,21 +77,21 @@ export function HowToPlay() {
           highlightIndex={0}
           color={colors.green}
           explanation="is in the word and in the correct spot."
-          flipped={flipped}
+          letterFlipped={letterFlipped}
         />
         <ExampleRow
           word="PILLS"
           highlightIndex={1}
           color={colors.yellow}
           explanation="is in the word but in the wrong spot."
-          flipped={flipped}
+          letterFlipped={letterFlipped}
         />
         <ExampleRow
           word="VAGUE"
           highlightIndex={3}
           color={colors.gray}
           explanation="is not in the word in any spot."
-          flipped={flipped}
+          letterFlipped={letterFlipped}
         />
       </div>
     </Dialog>

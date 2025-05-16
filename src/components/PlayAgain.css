@@ -20,6 +20,11 @@
   padding: 8px;
 }
 
+.playAgain button:hover {
+  background-color: #3a3a3c;
+  color: white;
+}
+
 .playAgain .close {
   width: 24px;
   height: 24px;
