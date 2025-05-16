@@ -14,7 +14,3 @@
   flex-direction: row;
   width: fit-content;
 }
-
-.keyboard .spacer {
-  flex: 0.5;
-}

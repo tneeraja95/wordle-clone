@@ -1,14 +1,13 @@
+import colors from "../constants";
+
 function updateKeyboardArray(setKeyboardArray, userInputArray) {
   setKeyboardArray((prev) => {
     userInputArray.forEach((input) => {
-      if (
-        prev[input.letter] === "rgb(58, 58, 60)" ||
-        prev[input.letter] === "grey"
-      ) {
+      if (prev[input.letter] === colors.defaultGrey) {
         prev[input.letter] = input.color;
       } else if (
-        prev[input.letter] === "#B59F3B" &&
-        input.color != "rgb(58, 58, 60)"
+        prev[input.letter] === colors.yellow &&
+        input.color === colors.green
       ) {
         prev[input.letter] = input.color;
       }

@@ -1,34 +1,12 @@
-function initialiseKeyboardArray() {
-    let keyboard = {
-        Q: "grey",
-        W: "grey",
-        E: "grey",
-        R: "grey",
-        T: "grey",
-        Y: "grey",
-        U: "grey",
-        I: "grey",
-        O: "grey",
-        P: "grey",
-        A: "grey",
-        S: "grey",
-        D: "grey",
-        F: "grey",
-        G: "grey",
-        H: "grey",
-        J: "grey",
-        K: "grey",
-        L: "grey",
-        Z: "grey",
-        X: "grey",
-        C: "grey",
-        V: "grey",
-        B: "grey",
-        N: "grey",
-        M: "grey"
-    }
+import colors from "../constants";
 
-  return keyboard; 
+function initialiseKeyboardArray() {
+  const keys = "QWERTYUIOPASDFGHJKLZXCVBNM".split("");
+
+  return keys.reduce((keyboard, key) => {
+    keyboard[key] = colors.defaultGrey;
+    return keyboard;
+  }, {});
 }
 
-export default initialiseKeyboardArray
+export default initialiseKeyboardArray;

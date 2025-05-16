@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Keyboard from "./Keyboard";
 import initialiseKeyboardArray from ".././utilities/initialiseKeyboardArray";
 import handleEnter from "../utilities/handleEnter";
+import colors from "../constants";
 
 const NO_OF_TRIES = 6;
 const WORD_LENGTH = 5;
@@ -15,7 +16,10 @@ function WordGame({ setGameOver, resetGame }) {
   let [currentFocus, setCurrentFocus] = useState([0, 0]);
   let [userInputArrayMatrix, setUserInputArrayMatrix] = useState(
     Array.from({ length: NO_OF_TRIES }, () =>
-      Array.from({ length: WORD_LENGTH }, () => ({ letter: "", color: "none" }))
+      Array.from({ length: WORD_LENGTH }, () => ({
+        letter: "",
+        color: colors.none,
+      }))
     )
   );
   let [keyboardArray, setKeyboardArray] = useState(initialiseKeyboardArray());
@@ -30,7 +34,7 @@ function WordGame({ setGameOver, resetGame }) {
       Array.from({ length: NO_OF_TRIES }, () =>
         Array.from({ length: WORD_LENGTH }, () => ({
           letter: "",
-          color: "none",
+          color: colors.none,
         }))
       )
     );
@@ -38,7 +42,6 @@ function WordGame({ setGameOver, resetGame }) {
     word = selectWordfromWordList();
   }, [resetGame]);
 
-  console.log(word);
   useEffect(() => {
     let keyPressEventFunction = (e) => {
       handleKeyPress(e.key);
@@ -50,10 +53,13 @@ function WordGame({ setGameOver, resetGame }) {
   }, [currentFocus]);
 
   let gameArray = userInputArrayMatrix.map((wordRow, rowId) => {
-    let row = wordRow.map((alpha, index) => {
+    let row = wordRow.map((tile, index) => {
       return (
-        <div key={index} style={{ background: alpha.color }}>
-          {alpha.letter}
+        <div
+          key={index}
+          style={{ background: tile.color, borderColor: tile.color }}
+        >
+          {tile.letter}
         </div>
       );
     });
