@@ -1,5 +1,5 @@
 import "./HowToPlay.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import colors from "../constants";
@@ -11,16 +11,29 @@ export function getTileStyle(color = colors.gray) {
   };
 }
 
-const ExampleRow = ({ word, highlightIndex, color, explanation }) => (
+const ExampleRow = ({ word, highlightIndex, color, explanation, flipped }) => (
   <div className="exampleBorder">
     <div className="example">
       {word.split("").map((char, index) => (
         <div
           key={index}
-          className="letter"
-          style={index === highlightIndex ? getTileStyle(color) : {}}
+          className={`letter ${
+            flipped && index === highlightIndex ? "flip" : ""
+          }`}
+          style={index === highlightIndex && flipped ? getTileStyle(color) : {}}
         >
-          {char}
+          <div
+            className="letter-content"
+            style={
+              index === highlightIndex && flipped
+                ? {
+                    transform: "rotateX(180deg)",
+                  }
+                : {}
+            }
+          >
+            {char}
+          </div>
         </div>
       ))}
     </div>
@@ -30,6 +43,12 @@ const ExampleRow = ({ word, highlightIndex, color, explanation }) => (
 
 export function HowToPlay() {
   const [open, setOpen] = useState(true);
+  const [flipped, setFlipped] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setFlipped(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
@@ -50,18 +69,21 @@ export function HowToPlay() {
           highlightIndex={0}
           color={colors.green}
           explanation="is in the word and in the correct spot."
+          flipped={flipped}
         />
         <ExampleRow
           word="PILLS"
           highlightIndex={1}
           color={colors.yellow}
           explanation="is in the word but in the wrong spot."
+          flipped={flipped}
         />
         <ExampleRow
           word="VAGUE"
           highlightIndex={3}
           color={colors.gray}
           explanation="is not in the word in any spot."
+          flipped={flipped}
         />
       </div>
     </Dialog>

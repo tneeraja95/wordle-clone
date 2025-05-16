@@ -3,15 +3,18 @@
   align-items: center;
   justify-content: center;
   display: flex;
+  overflow: scroll;
+  scrollbar-width: none;
+  margin: 15px;
 }
 
 .wordGame .mainGame {
   display: flex;
   align-items: center;
-  justify-content: center;
+  height: 100%;
   flex-direction: column;
-  margin: 5px;
-  font-family: "Times New Roman", Times, serif;
+  font-family: monospace;
+  justify-content: center;
 }
 
 .wordGame .mainGame .word {
@@ -20,7 +23,7 @@
   height: fit-content;
 }
 
-.wordGame .mainGame .word div {
+.wordGame .mainGame .word .tile {
   margin: 2px;
   color: white;
   text-transform: uppercase;

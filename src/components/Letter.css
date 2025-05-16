@@ -15,3 +15,8 @@
 .keyboard .special {
   width: 72px;
 }
+
+.keyboard .letter:hover {
+  transition: scale 0.1s ease-in-out;
+  scale: 1.1;
+}
