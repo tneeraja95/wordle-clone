@@ -1,8 +1,6 @@
 import checkWordinWordList from "../utilities/checkWordinWordList";
 import checkMatch from "./checkMatch";
-
-const NO_OF_TRIES = 6;
-const WORD_LENGTH = 5;
+import { NO_OF_TRIES, WORD_LENGTH } from "../constants";
 
 function handleEnter(
   userInputArray,

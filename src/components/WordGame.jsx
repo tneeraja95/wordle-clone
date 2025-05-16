@@ -4,10 +4,12 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import Keyboard from "./Keyboard";
 import initialiseKeyboardArray from "../utilities/initialiseKeyboardArray";
 import handleEnter from "../utilities/handleEnter";
-import colors from "../constants";
-
-const NO_OF_TRIES = 6;
-const WORD_LENGTH = 5;
+import colors, {
+  BACKSPACE,
+  ENTER,
+  NO_OF_TRIES,
+  WORD_LENGTH,
+} from "../constants";
 
 function WordGame({ setGameOver, resetGame }) {
   const [showPopup, setShowPopup] = useState(false);
@@ -55,12 +57,12 @@ function WordGame({ setGameOver, resetGame }) {
   const handleKeyPress = useCallback(
     (key) => {
       const [row, index] = currentFocus;
-
-      if (key === "BACKSPACE") {
+      console.log(key);
+      if (key === BACKSPACE) {
         const targetIndex = index > 0 ? index - 1 : 0;
         updateMatrix("", [row, targetIndex]);
         setCurrentFocus([row, targetIndex]);
-      } else if (key === "ENTER") {
+      } else if (key === ENTER) {
         handleEnter(
           userInputArrayMatrix[row],
           word.toUpperCase().split(""),

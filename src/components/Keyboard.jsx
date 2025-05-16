@@ -3,11 +3,12 @@ import Letter from "./Letter";
 import "./Keyboard.css";
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import colors from "../constants";
+import { BACKSPACE, ENTER } from "../constants";
 
 const rows = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-  ["Enter", "Z", "X", "C", "V", "B", "N", "M", "Backspace"],
+  [ENTER, "Z", "X", "C", "V", "B", "N", "M", BACKSPACE],
 ];
 
 function Keyboard({ keyboardArray, onLetterClick }) {
@@ -18,9 +19,9 @@ function Keyboard({ keyboardArray, onLetterClick }) {
           {row.map((letter) => (
             <Letter
               key={letter}
-              letter={letter === "Backspace" ? <BackspaceIcon /> : letter}
+              letter={letter === BACKSPACE ? <BackspaceIcon /> : letter}
               backgroundColor={
-                letter === "Enter" || letter === "Backspace"
+                letter === ENTER || letter === BACKSPACE
                   ? colors.defaultGrey
                   : keyboardArray[letter]
               }

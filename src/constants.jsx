@@ -6,4 +6,9 @@ const colors = {
   none: "none",
 };
 
+export const BACKSPACE = "BACKSPACE";
+export const ENTER = "ENTER";
+export const WORD_LENGTH = 5;
+export const NO_OF_TRIES = 6;
+
 export default colors;

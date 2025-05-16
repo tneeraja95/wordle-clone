@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./WordRow.css";
+import { BACKSPACE, ENTER } from "../constants";
 
 function WordRow({
   currentFocus,
@@ -7,7 +8,7 @@ function WordRow({
   userInputArrayMatrix,
   handleKeyPress,
   refArrayMatrix,
-   setIndex
+  setIndex,
 }) {
   let userInputArray = userInputArrayMatrix[rowId];
   useEffect(() => {
@@ -30,13 +31,16 @@ function WordRow({
           e.preventDefault();
         }}
         onChange={(e) => {
-       //   setIndex(index)
+          //   setIndex(index)
           handleKeyPress(e.target.value.toUpperCase(), index);
         }}
         onKeyDown={(e) => {
-          setIndex(index)
-          if(e.key === 'Enter' || e.key === 'Backspace')
-          handleKeyPress(e.key, index);
+          setIndex(index);
+          if (
+            e.key.toUpperCase() === ENTER ||
+            e.key.toUpperCase() === BACKSPACE
+          )
+            handleKeyPress(e.key, index);
         }}
         onMouseDown={(e) => e.preventDefault()}
         style={{ background: userInputArray[index].color }}
@@ -56,7 +60,7 @@ function WordRow({
       }}
       onKeyDown={(e) => {
         e.stopPropagation();
-          setIndex(5);
+        setIndex(5);
         handleKeyPress(e.key, 5);
       }}
     />
