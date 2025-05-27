@@ -1,34 +1,20 @@
 import "./WordGame.css";
 import selectWordfromWordList from "../utilities/selectWordfromWordList";
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Keyboard from "./Keyboard";
-import initialiseKeyboardArray from "../utilities/initialiseKeyboardArray";
-import handleEnter from "../utilities/handleEnter";
-import colors, {
-  BACKSPACE,
-  ENTER,
-  NO_OF_TRIES,
-  WORD_LENGTH,
-} from "../constants";
+import { initialiseKeyboardArray } from "../utilities/keyboard";
+import { handleEnter } from "../utilities/handleEnter";
+import getInitialMatrix from "../utilities/matrix";
+import { BACKSPACE, ENTER, WORD_LENGTH } from "../constants";
 
 function WordGame({ setGameOver, resetGame }) {
   const [showPopup, setShowPopup] = useState(false);
   const [popupText, setPopupText] = useState("");
   const [currentFocus, setCurrentFocus] = useState([0, 0]);
-
-  const getInitialMatrix = () =>
-    Array.from({ length: NO_OF_TRIES }, () =>
-      Array.from({ length: WORD_LENGTH }, () => ({
-        letter: "",
-        color: colors.none,
-      }))
-    );
-
   const [userInputArrayMatrix, setUserInputArrayMatrix] =
     useState(getInitialMatrix);
-  const [keyboardArray, setKeyboardArray] = useState(initialiseKeyboardArray());
-
-  const word = useMemo(() => selectWordfromWordList(), [resetGame]);
+  const [keyboardArray, setKeyboardArray] = useState(initialiseKeyboardArray);
+  const [word, setWord] = useState(selectWordfromWordList);
 
   // Reset on new game
   useEffect(() => {
@@ -36,6 +22,7 @@ function WordGame({ setGameOver, resetGame }) {
     setShowPopup(false);
     setUserInputArrayMatrix(getInitialMatrix());
     setKeyboardArray(initialiseKeyboardArray());
+    setWord(selectWordfromWordList());
   }, [resetGame]);
 
   // Handle keyboard events
@@ -57,7 +44,6 @@ function WordGame({ setGameOver, resetGame }) {
   const handleKeyPress = useCallback(
     (key) => {
       const [row, index] = currentFocus;
-      console.log(key);
       if (key === BACKSPACE) {
         const targetIndex = index > 0 ? index - 1 : 0;
         updateMatrix("", [row, targetIndex]);
@@ -90,7 +76,10 @@ function WordGame({ setGameOver, resetGame }) {
           <div
             key={tileIndex}
             className="tile"
-            style={{ background: tile.color, borderColor: tile.color }}
+            style={{
+              background: tile.backgroundColor,
+              borderColor: tile.borderColor,
+            }}
           >
             {tile.letter}
           </div>

@@ -2,7 +2,7 @@ import "./HowToPlay.css";
 import { useState, useEffect } from "react";
 import { Dialog } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import colors from "../constants";
+import { colors } from "../constants";
 
 export function getTileStyle(color = colors.gray) {
   return {

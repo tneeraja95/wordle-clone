@@ -1,5 +1,5 @@
-import updateKeyboardArray from "./updateKeyboardArray";
-import colors from "../constants";
+import { updateKeyboardArray } from "./keyboard";
+import { colors } from "../constants";
 
 function checkMatch(
   userInputArray,
@@ -41,7 +41,8 @@ function checkMatch(
   setUserInputArrayMatrix((prev) => {
     let newArray = [...prev];
     letterBgArray.forEach((element, index) => {
-      newArray[rowId][index].color = element;
+      newArray[rowId][index].backgroundColor = element;
+      newArray[rowId][index].borderColor = element;
     });
     return newArray;
   });

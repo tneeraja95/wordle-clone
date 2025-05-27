@@ -2,7 +2,7 @@ import checkWordinWordList from "../utilities/checkWordinWordList";
 import checkMatch from "./checkMatch";
 import { NO_OF_TRIES, WORD_LENGTH } from "../constants";
 
-function handleEnter(
+export function handleEnter(
   userInputArray,
   letterArray,
   index,
@@ -78,5 +78,3 @@ function handleEnter(
     setCurrentFocus(() => [rowId + 1, 0]);
   }
 }
-
-export default handleEnter;

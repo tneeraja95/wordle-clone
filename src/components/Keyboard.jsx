@@ -1,8 +1,7 @@
-import React from "react";
 import Letter from "./Letter";
 import "./Keyboard.css";
 import BackspaceIcon from "@mui/icons-material/Backspace";
-import colors from "../constants";
+import { colors } from "../constants";
 import { BACKSPACE, ENTER } from "../constants";
 
 const rows = [
