@@ -1,8 +1,8 @@
-function Statistics() {
-  let noOfGames = parseInt(localStorage.getItem("noOfGames") || 0);
-  let AvgGuesses = parseInt(localStorage.getItem("AvgGuesses") || 0);
-  let gamesWon = parseInt(localStorage.getItem("gamesWon") || 0);
-  let gamesLost = parseInt(localStorage.getItem("gamesLost") || 0);
+function Statistics({ stats }) {
+  let noOfGames = stats.noOfGames;
+  let AvgGuesses = stats.AvgGuesses.toFixed(0);
+  let gamesWon = stats.gamesWon;
+  let gamesLost = stats.gamesLost;
 
   return (
     <div>
@@ -31,5 +31,16 @@ function Statistics() {
     </div>
   );
 }
+
+import PropTypes from "prop-types";
+
+Statistics.propTypes = {
+  stats: PropTypes.shape({
+    noOfGames: PropTypes.number.isRequired,
+    AvgGuesses: PropTypes.number.isRequired,
+    gamesWon: PropTypes.number.isRequired,
+    gamesLost: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default Statistics;

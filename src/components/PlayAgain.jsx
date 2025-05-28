@@ -3,11 +3,11 @@ import "./PlayAgain.css";
 import CloseIcon from "@mui/icons-material/Close";
 import Statistics from "./Statistics";
 
-function PlayAgain({ gameOver, setGameOver, setResetGame }) {
+function PlayAgain({ gameOver, setGameOver, setResetGame, stats }) {
   return (
     <Dialog open={gameOver} onClose={() => setGameOver(false)}>
       <div className="playAgain">
-        <Statistics />
+        <Statistics stats={stats} />
         <CloseIcon onClick={() => setGameOver(false)} className="close" />
         <button
           onClick={() => {

@@ -1,15 +1,15 @@
 import "./WordGame.css";
-import selectWordfromWordList from "../utilities/selectWordfromWordList";
+import { selectWordfromWordList } from "../utilities/wordList";
 import { useEffect, useState, useCallback } from "react";
 import Keyboard from "./Keyboard";
+import WordArray from "./WordArray";
 import { initialiseKeyboardArray } from "../utilities/keyboard";
-import { handleEnter } from "../utilities/handleEnter";
-import getInitialMatrix from "../utilities/matrix";
+import { processUserGuessSubmission } from "../utilities/userGuess";
+import { getInitialMatrix, updateMatrix } from "../utilities/matrix";
 import { BACKSPACE, ENTER, WORD_LENGTH } from "../constants";
 
-function WordGame({ setGameOver, resetGame }) {
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupText, setPopupText] = useState("");
+function WordGame({ setGameOver, resetGame, setStats }) {
+  const [popup, setPopup] = useState({ show: false, text: "" });
   const [currentFocus, setCurrentFocus] = useState([0, 0]);
   const [userInputArrayMatrix, setUserInputArrayMatrix] =
     useState(getInitialMatrix);
@@ -19,10 +19,10 @@ function WordGame({ setGameOver, resetGame }) {
   // Reset on new game
   useEffect(() => {
     setCurrentFocus([0, 0]);
-    setShowPopup(false);
-    setUserInputArrayMatrix(getInitialMatrix());
-    setKeyboardArray(initialiseKeyboardArray());
-    setWord(selectWordfromWordList());
+    setPopup({ show: false, text: "" });
+    setUserInputArrayMatrix(getInitialMatrix);
+    setKeyboardArray(initialiseKeyboardArray);
+    setWord(selectWordfromWordList);
   }, [resetGame]);
 
   // Handle keyboard events
@@ -32,68 +32,45 @@ function WordGame({ setGameOver, resetGame }) {
     return () => document.body.removeEventListener("keyup", handleKey);
   }, [currentFocus, userInputArrayMatrix]);
 
-  const updateMatrix = useCallback((key, [row, col]) => {
-    setUserInputArrayMatrix((prev) => {
-      const updated = [...prev];
-      updated[row] = [...updated[row]];
-      updated[row][col] = { ...updated[row][col], letter: key };
-      return updated;
-    });
-  }, []);
-
   const handleKeyPress = useCallback(
     (key) => {
       const [row, index] = currentFocus;
       if (key === BACKSPACE) {
         const targetIndex = index > 0 ? index - 1 : 0;
-        updateMatrix("", [row, targetIndex]);
+        setUserInputArrayMatrix((prev) =>
+          updateMatrix(prev, "", [row, targetIndex])
+        );
         setCurrentFocus([row, targetIndex]);
       } else if (key === ENTER) {
-        handleEnter(
+        processUserGuessSubmission(
           userInputArrayMatrix[row],
           word.toUpperCase().split(""),
           index,
-          setPopupText,
-          setShowPopup,
+          setPopup,
           setCurrentFocus,
           row,
           setKeyboardArray,
           setUserInputArrayMatrix,
-          setGameOver
+          setGameOver,
+          setStats
         );
       } else if (/^[A-Z]$/.test(key) && index < WORD_LENGTH) {
-        updateMatrix(key, [row, index]);
+        setUserInputArrayMatrix((prev) =>
+          updateMatrix(prev, key, [row, index])
+        );
         setCurrentFocus([row, index + 1]);
       }
     },
-    [currentFocus, userInputArrayMatrix, word, updateMatrix, setGameOver]
+    [currentFocus, userInputArrayMatrix, word, setGameOver]
   );
-
-  const renderGameGrid = () =>
-    userInputArrayMatrix.map((row, rowIndex) => (
-      <div key={rowIndex} className="word">
-        {row.map((tile, tileIndex) => (
-          <div
-            key={tileIndex}
-            className="tile"
-            style={{
-              background: tile.backgroundColor,
-              borderColor: tile.borderColor,
-            }}
-          >
-            {tile.letter}
-          </div>
-        ))}
-      </div>
-    ));
 
   return (
     <div className="wordGame">
       <div className="mainGame">
-        <div className={`popup ${showPopup ? "" : "invisible"}`}>
-          {popupText}
+        <div className={`popup ${popup.show ? "" : "invisible"}`}>
+          {popup.text}
         </div>
-        <div className="gameArray">{renderGameGrid()}</div>
+        <WordArray userInputArrayMatrix={userInputArrayMatrix} />
         <Keyboard
           keyboardArray={keyboardArray}
           onLetterClick={handleKeyPress}
